@@ -1,0 +1,35 @@
+{
+  "name": "nodejs-express-sequelize-mysql",
+  "version": "1.0.0",
+  "description": "Node.js Rest Apis with Express, Sequelize & MySQL",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "rest",
+    "api",
+    "sequelize",
+    "mysql"
+  ],
+  "author": "bezkoder",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql2": "^2.3.0",
+    "sequelize": "^5.22.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cashmets/cm_api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cashmets/cm_api/issues"
+  },
+  "homepage": "https://github.com/cashmets/cm_api#readme"
+}
