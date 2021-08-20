@@ -1,5 +1,6 @@
 const db = require("../models");
 const config = require("../config/auth.config");
+const { emailsending } = require("../emails");
 const User = db.user;
 const Role = db.role;
 
@@ -12,8 +13,8 @@ exports.signup = (req, res) => {
   // Save User to Database
   User.create({
     mobile: req.body.mobile,
-    fullname: req.body.fullname,
     email: req.body.email,
+    fullname: req.body.fullname,
     password: bcrypt.hashSync(req.body.password, 8)
   })
     .then(user => {
@@ -26,13 +27,13 @@ exports.signup = (req, res) => {
           }
         }).then(roles => {
           user.setRoles(roles).then(() => {
-            res.send({ message: "User registered successfully!" });
+            res.send({ message: "User registered successfullyabc!" });
           });
         });
       } else {
         // user role = 1
         user.setRoles([1]).then(() => {
-          res.send({ message: "User registered successfully!" });
+          res.send({ message: "User registered successfully123!" });
         });
       }
     })
@@ -67,17 +68,17 @@ exports.signin = (req, res) => {
       var token = jwt.sign({ id: user.id }, config.secret, {
         expiresIn: 86400 // 24 hours
       });
-
       var authorities = [];
       user.getRoles().then(roles => {
         for (let i = 0; i < roles.length; i++) {
           authorities.push("ROLE_" + roles[i].name.toUpperCase());
         }
+        console.log(emailsending.sendEmailWithoutAttachment("SUCCESS"));
         res.status(200).send({
           id: user.id,
           mobile: user.mobile,
-          fullname: user.fullname,
           email: user.email,
+          fullname: user.fullname,
           roles: authorities,
           accessToken: token
         });

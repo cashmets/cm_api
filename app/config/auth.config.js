@@ -1,3 +1,3 @@
 module.exports = {
-  secret: "cashmets-secret-key"
+  secret: "bezkoder-secret-key"
 };

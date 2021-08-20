@@ -1,34 +1,27 @@
+const db = require("../models");
 const nodemailer = require('nodemailer');
-const sendgridTransport = require('nodemailer-sendgrid-transport');
-
-const route = express.Router();
-
-const port = process.env.PORT || 5000;
-
-app.use('/v1', route);
-
-app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
-});
-
+// import fs from "fs";
+// import ejs from "ejs";
+// import { htmlToText } from "html-to-text";
 
 const transporter = nodemailer.createTransport({
-    port: 465,
-    host: "smtp.gmail.com",
+    port: 587,
+    host: "vps.cashmets.com",
     auth: {
-        user: 'youremail@gmail.com',
-        pass: 'xxxxxxxxxx',
+        user: 'help@cashmets.com',
+        pass: 'Sksg@1010',
     },
-    secure: true, // upgrades later with STARTTLS -- change this based on the PORT
+    secure: 'SSL/TLS', // upgrades later with STARTTLS -- change this based on the PORT
 });
 
-route.post('/text-mail', (req, res) => {
-    const {to, subject, text } = req.body;
+sendEmailWithoutAttachment = (req, res, next) => {
+    console.log("sendEmailWithoutAttachment"+req);
+    // const {to, subject, text } = req.body;
     const mailData = {
-        from: 'youremail@gmail.com',
-        to: to,
-        subject: subject,
-        text: text,
+        from: 'help@cashmets.com',
+        to: 'saikrishnaporala@gmail.com',
+        subject: 'test mail',
+        text: 'test',
         html: '<b>Hey there! </b><br> This is our first message sent with Nodemailer<br/>',
     };
 
@@ -38,10 +31,10 @@ route.post('/text-mail', (req, res) => {
         }
         res.status(200).send({ message: "Mail send", message_id: info.messageId });
     });
-});
+    return "success";
+};
 
-
-route.post('/attachments-mail', (req, res) => {
+sendEmailWithAttachment = (req, res, next) => {
     const {to, subject, text } = req.body;
     const mailData = {
         from: 'youremail@gmail.com',
@@ -67,4 +60,10 @@ route.post('/attachments-mail', (req, res) => {
         }
         res.status(200).send({ message: "Mail send", message_id: info.messageId });
     });
-});
+};
+const emailsending = {
+    sendEmailWithoutAttachment: sendEmailWithoutAttachment,
+    sendEmailWithAttachment: sendEmailWithAttachment
+};
+
+module.exports = emailsending;
