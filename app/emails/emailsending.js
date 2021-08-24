@@ -11,8 +11,16 @@ const transporter = nodemailer.createTransport({
         user: 'help@cashmets.com',
         pass: 'Sksg@1010',
     },
-    secure: 'SSL/TLS', // upgrades later with STARTTLS -- change this based on the PORT
+    secure: 'TLS', // upgrades later with STARTTLS -- change this based on the PORT
 });
+
+// $mail->Host = "vps.cashmets.com"; 
+// $mail->Port = 587; 
+// $mail->SMTPAuth = true; 
+// $mail->SMTPDebug = 3; 
+// $mail->Username = "enter the emailid"; 
+// $mail->Password = “enter the Password"; 
+// $mail->SMTPSecure = "tls";
 
 sendEmailWithoutAttachment = (req, res, next) => {
     console.log("sendEmailWithoutAttachment"+req);
